@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bsc.CSIT</title>
+
+    <!--Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo1.png') }}">
+      <!--Stylesheet-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*------------------ROOT VARIABLES--------------*/
+:root{
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0.2rem 3rem var(--color-light);
+}
+
+.dark-theme-variables{
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+
+body{
+    display: flex;
+    width:100vw;
+    height:100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+}
+
+.container{
+    display: grid;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto 23rem;
+
+}
+
+a{
+    color: var(--color-dark);
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+
+h1{
+    font-weight:800;
+    font-size: 1.8rem;
+}
+
+h2{
+    font-size: 1.4rem;
+}
+
+h3{
+    font-size: 0.87rem;
+}
+
+h4{
+    font-size: 0.8rem; 
+}
+
+h5{
+    font-size: 0.77rem;
+}
+
+small{
+    font-size:0.75rem;
+}
+
+.profile-photo{
+    width:2.8rem;
+    height: 2.8rem;
+    border-radius:50%;
+    overflow: hidden;
+}
+
+.text-muted{
+    color: var(--color-info-dark);
+}
+
+p{
+    color: var(--color-dark-variant);
+}
+
+b{
+    color: var(--color-dark);
+}
+
+.primary{
+    color: var(--color-primary);
+}
+
+.danger{
+    color: var(--color-primary);
+}
+.success{
+    color: var(--color-primary);
+}
+.warning{
+    color: var(--color-primary);
+}
+
+aside{
+    height: 100vh;
+}
+
+aside .top{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .logo{
+    display: flex;
+    gap: 0.8rem;
+}
+aside .logo img{
+    width: 3rem;
+    height: 3rem;
+}
+
+/* ======================Sidebar====================*/
+aside .sidebar{
+    display: flex;
+    flex-direction: column;
+    height: 86vh;
+    position: sticky;
+    top: 3rem;
+}
+
+aside h3{
+    font-weight: 500;
+}
+
+aside .sidebar a{
+    display: flex;
+    color: var(--color-info-dark);
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.7rem;
+    transition: all 300ms ease;
+}
+aside .sidebar a.result{
+    margin-top:3rem;
+}
+
+aside .sidebar a span{
+    font-size: 1.6rem;
+    transition: all 300ms ease;
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 0rem;
+    width: 100%;
+}
+
+aside .sidebar a.active{
+    background: var(--color-light);
+    color: var(--color-primary);
+    margin-left: 0;
+}
+
+aside .sidebar a.active:before{
+    content: "";
+    width: 6px;
+    height: 100%;
+    background: var(--color-primary);
+}
+
+aside .sidebar a.active span{
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover{
+    color: var(--color-primary);
+}
+
+aside .sidebar a:hover span{
+    margin-left: 1rem;
+}
+
+/*----------------------Main----------------------*/
+main{
+    margin-top: 1.4rem;
+}
+
+main .date{
+    display: inline-block;
+    background: var(--color-light);
+    border-radius: var(--border-radius-1);
+    margin-top: 1rem;
+    padding: 0.5rem 1.6rem;
+}
+
+main .date input[type="date"] {
+    background: transparent;
+    color: var(--color-dark);
+}
+
+main .insights{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+}
+
+main .insights > div{
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: all 300ms ease;
+}
+
+main .insights > div:hover{
+    box-shadow: none;
+    
+}
+
+
+/*===============Ranks===================*/
+main .rank{
+    margin-top: 2rem;
+}
+
+main .rank h2{
+    margin-bottom: 0.8rem;
+}
+
+.table-container {
+    transform: translateX(100px);
+    position: relative;
+    max-height: 480px;
+    overflow-y: scroll;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: none;
+    transition: all 300ms ease;
+   -ms-overflow-style: none; /* Edge */
+}
+
+.table-container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none; /* Chrome, Safari, Edge */
+}
+
+
+.table-container:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: all 300ms ease;
+}
+
+
+.table-container td {
+    padding: 10px;
+    text-align: center;
+}
+main .rank table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+main table tbody td {
+    height: 0.8rem;
+    padding: 10px;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+main table tbody tr:last-child td {
+    border: none;
+}
+
+
+
+main .rank a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+}
+
+/*===================Right=======================*/
+
+.right{
+    margin-top: 1.4rem;
+}
+
+.right .top{
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+}
+
+.right .top button{
+    display: none;
+}
+
+.right .theme-toggler{
+    background: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+}
+.right .theme-toggler span{
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right .theme-toggler span.active{
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius-1);
+}
+
+.right .top .profile{
+    display: flex;
+    gap: 1rem;
+    text-align: right;
+}
+
+
+
+.sidebar .subjects-dropdown {
+    display: none;
+    flex-direction: column;
+    margin-left: 2rem;
+    gap: 1rem;
+    transition: all 300ms ease;
+}
+
+.sidebar .subjects-dropdown a {
+    color: var(--color-info-dark);
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 2rem;
+}
+
+.sidebar .subjects-dropdown a:hover {
+    color: var(--color-primary);
+}
+
+.sidebar .subjects-dropdown a span {
+    font-size: 1rem;
+}
+
+.sidebar .subjects-toggle {
+    cursor: pointer; 
+}
+
+.sidebar .subjects-toggle:hover {
+    color: var(--color-primary);
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo1.png') }}">
+                    <h2>Himalaya</h2>
+                </div>
+
+            </div>
+            <div class="sidebar">
+                <a href="{{ url_for('info') }}" class="result">
+                    <span class="material-symbols-sharp">receipt_long</span>
+                    <h3>Your Result</h3>
+                </a>
+                <a href="{{ url_for('ranking') }}" class="active">
+                    <span class="material-symbols-sharp">military_tech</span>
+                    <h3>All Class Rank</h3>
+                </a>
+                
+                <a href="{{ url_for('home') }}">
+                    <span class="material-symbols-sharp">Logout</span>
+                    <h3>Go Back</h3>
+                </a>
+            </div>
+        </aside>
+        <!------------------------End of aside-------------------------->
+
+        <main>
+            <h1>Dashboard</h1>
+
+            
+            <!------------------------End of insights-------------------------->            
+
+            <div class="rank">
+                <h2>Ranks of Students</h2>
+                <div class="parent">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student Name</th>
+                                    <th>Roll No</th>
+                                    <th>Total Score</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in students %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.roll }}</td>
+                                    <td>{{ student.total_score }}</td>
+                                    <td>{{ ((student.total_score / 500) * 100)|round(2) }}%</td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="5">No records found</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            </div>
+            
+        </main>
+    <!--------------------------End of main--------------------->
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-outlined active">light_mode</span>
+                    <span class="material-symbols-outlined ">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        {% if student %}
+                            <p>Hello, <b>{{ student.name.split()[0] }}</b></p>
+                        {% else %}
+                            <p>Hello, <b>Student</b></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!--------------------------End of top--------------------->
+
+    
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

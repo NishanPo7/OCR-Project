@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="{{ url_for('static', filename='css/style2.css') }}" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo1.png') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+          <a href="https://www.hcoe.edu.np/" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></a>
+         <!--
+          <ul class="nav-links">
+            <li><a href="student1.html" class="login-btn">Go to Student</a></li>
+          </ul>
+          -->
+          <div class="menu-toggle">&#9776;</div>
+        </nav>
+      </header>
+
+      <div class="fade-in-left delay-0 text-box">
+        <h1>Admin Registration</h1>
+        <br>
+        <h4>Enter the information College has provided for verification.</h4>
+        <br>
+        <a href="{{ url_for('home') }}"><button class="button-13" role="button">Student?</button></a>
+    </div>
+
+    <div class="fade-in-right delay-1 wrapper">
+      
+      <form action="{{ url_for('admin_register') }}" method="POST">
+          <h2>Register "Admin"</h2>
+          <div class="input-field">
+              <input type="text" name="fullname" required>
+              <label>Full Name</label>
+          </div>
+          <div class="input-field">
+              <input type="email" name="email" required>
+              <label>Email Address</label>
+          </div>
+          <div class="input-field">
+              <input type="password" name="password" id="password" required>
+              <label>Password</label>
+              <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+          </div>
+          <div class="input-field">
+              <input type="password" name="confirm_password" id="confirm_password" required>
+              <label>Confirm Password</label>
+              <span class="toggle-password" onclick="togglePassword('confirm_password')">👁</span>
+          </div>
+          <button type="submit">Register</button>
+          <div class="register">
+              <p>Already have an account? <a href="{{ url_for('admin_login') }}">Login</a></p>
+          </div>
+      </form>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+  </div>
+  <script>
+    function togglePassword(fieldId) {
+        var passwordField = document.getElementById(fieldId);
+        if (passwordField.type === "password") {
+            passwordField.type = "text";  // Show password
+        } else {
+            passwordField.type = "password";  // Hide password
+        }
+    }
+    </script>
+</body>
+</html>

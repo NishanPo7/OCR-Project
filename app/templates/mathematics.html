@@ -1,0 +1,189 @@
+<!---->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bsc.CSIT</title>
+
+    <!--Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo1.png') }}">
+      <!--Stylesheet-->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo1.png') }}">
+                    <h2>Himalaya</h2>
+                </div>
+
+            </div>
+            <div class="sidebar">
+                <a href="{{ url_for('index') }}" class="active">
+                    <span class="material-symbols-sharp">military_tech</span>
+                    <h3>Overall Ranks</h3>
+                </a>
+                <a href="#" class="subjects-toggle">
+                    <span class="material-symbols-sharp">receipt_long</span>
+                    <h3>Subjects</h3>
+                </a>
+                <div class="subjects-dropdown">
+                    <a href="{{ url_for('iit') }}">
+                        <span class="material-symbols-sharp">subject</span>
+                        <h3>IIT</h3>
+                    </a>
+                    <a href="{{ url_for('cp') }}">
+                        <span class="material-symbols-sharp">subject</span>
+                        <h3>C-Programming</h3>
+                    </a>
+                    <a href="{{ url_for('digital') }}">
+                        <span class="material-symbols-sharp">subject</span>
+                        <h3>Digital Logic</h3>
+                    </a>
+                    <a href="{{ url_for('mathematics') }}">
+                        <span class="material-symbols-sharp">subject</span>
+                        <h3>Mathematics I</h3>
+                    </a> 
+                    <div id="physics">
+                    <a href="{{ url_for('physics') }}">
+                        <span class="material-symbols-sharp">subject</span>
+                        <h3>Physics</h3>
+                    </a>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('admin_logout') }}">
+                    <span class="material-symbols-sharp">Logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+       <!------------------------End of aside-------------------------->
+
+        <main>
+            <h1>Mathematics-I Score</h1>
+
+            <div class="insights">
+                {% for n in range(3) %}
+                <div class="{{ ['sales', 'expenses', 'income'][n] }}">
+                    <span class="material-symbols-sharp">
+                        {% if n == 0 %}person
+                        {% elif n == 1 %}group
+                        {% else %}groups{% endif %}
+                    </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>{{ n+1 }}<sup>
+                                {% if n == 0 %}st
+                                {% elif n == 1 %}nd
+                                {% else %}rd{% endif %}
+                            </sup> Pos</h3>
+                        </div>
+                        <h3 style="font-size: 11.5px;" class="{% if n == 0 %}gold{% elif n == 1 %}silver{% else %}bronze{% endif %}">
+                            {{ top_students[n].name if top_students|length > n else 'No Data' }}
+                        </h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!------------------------End of insights-------------------------->            
+
+            <div class="rank">
+                <h2>Subject Ranks</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Student Name</th>
+                                <th>Roll No</th>
+                                <th>Subject Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ student.name }}</td>
+                                <td>{{ student.roll }}</td>
+                                <td>{{ student.math_score }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4">No records found</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </main>
+    <!--------------------------End of main--------------------->
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-outlined active">light_mode</span>
+                    <span class="material-symbols-outlined ">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>{{ session.admin_first_name }}</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="{{ url_for('static', filename='images/admin.png') }}">
+                    </div>
+                </div>
+            </div>
+            <!--------------------------End of top--------------------->
+
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+                    {% for update in recent_updates %}
+                    <div class="update">
+                        <div class="message">
+                            <p>Received doc of <b>{{ update.name }}</b></p>
+                            
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="update">
+                        <div class="message">
+                            <p>No recent updates</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!--------------------------End of Recent Updates--------------------->
+
+            <div class="sales-analytics">
+                <h2>Start Your Scanning Here</h2>
+                <a href="{{ url_for('scanner') }}">
+                <div class="item add-product" id="uploadButton">
+                    <div>
+                        <span class="material-symbols-outlined">add</span>
+                        <h3>Start Scanning Process</h3>
+                    </div>
+                 <input type="file" id="fileInput" style="display:none;">
+                </div>
+            </a>
+            </div>
+        </div>
+    </div>
+    
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

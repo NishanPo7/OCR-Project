@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link href="{{ url_for('static', filename='css/style2.css') }}" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo1.png') }}">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="https://www.hcoe.edu.np/" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></a>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('admin_login') }}" class="login-btn">Admin Login</a></li>
+      </ul>
+      <div class="menu-toggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <div class="fade-in-left delay-0 text-box">
+    <h1>Bsc.CSIT Result</h1>
+    <h4>See what you have obtained</h4>
+    <br>
+</div>
+
+  <div class="fade-in-right delay-1 wrapper">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <div class="flash-error">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form action="/info" method="POST">
+      <div class="input-field">
+        <input type="text" name="fullname" required>
+        <label>Full Name</label>
+      </div>
+      <div class="input-field">
+        <input type="text" name="rollnumber" required>
+        <label>Roll Number</label>
+      </div>
+      <br>
+      <h4 style="color:white;">Roll No eg: 26536/077</h4>
+      <br>
+      <button type="submit">View Result</button>
+    </form>
+    
+  </div>
+</body>
+</html>
